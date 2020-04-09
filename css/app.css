@@ -62,11 +62,11 @@ button:active{
     transition: transform 10ms;
 }
 
-#start-game {
+.start-game {
     background-color: #aaffb0;
 }
 
-#start-game:hover {
+.start-game:hover {
     background-color: #76ff7e;
 }
 
@@ -100,4 +100,17 @@ button:active{
 
 #give-up:hover {
     background-color: #c7c7c7;
+}
+input[type=text] {
+    width: 100px;
+    height: 50px;
+    background-color: #eee;
+    box-shadow: 0 1px 1px black;
+    margin: 10px;
+    border-radius: 6px;
+    padding-left: 5px;
+}
+
+input[type=text]:focus {
+    border-color: #222;
 }

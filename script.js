@@ -1,23 +1,36 @@
 new Vue({
     el: '#app',
     data: {
+        showStart: true,
         showMenu: false,
         showLogs: false,
+        showStats: false,
         playerHealth: 100,
         monsterHealth: 100,
+        attackPoints: 30,
+        healPoints: 40,
         logs: [],
         playerTurn: true,
         counterMonsterSpecial: 5,
         counterPlayerSpecial: 5,
         counterMonsterHeal: 5,
         counterPlayerHeal: 5,
+        message:"Sum of attack and heal must be 70.",
     },
     methods: {
         start: function(){
-            this.showMenu = !this.showMenu;
-            this.showLogs = !this.showLogs;
-            this.playerTurn = true;
-            this.logs.unshift("Game started!");
+            this.attackPoints = parseInt(this.attackPoints);
+            this.healPoints = parseInt(this.healPoints);
+            if(this.attackPoints + this.healPoints === 70){
+                this.showMenu = !this.showMenu;
+                this.showLogs = !this.showLogs;
+                this.playerTurn = true;
+                this.showStats = false;
+                this.logs.unshift("Game started!");
+            }
+            else{
+                this.message = "Sum of values isn't equal to 70!"
+            }
         },
         giveUp: function(){
             if(confirm('Do you really want to surrender?')) {
@@ -25,14 +38,14 @@ new Vue({
             }
         },
         attack: function(){
-            let damage = Math.floor(Math.random() * 20);
+            let damage = Math.floor(Math.random() * this.attackPoints);
             this.monsterHealth -= damage;
             this.playerTurn = true;
             this.logs.unshift("Monster takes " + damage + " damage");
             this.monsterMove();
         },
-        specialAttack: function(player){
-            let damage = Math.floor(Math.random() * (40-20));
+        specialAttack: function(){
+            let damage = Math.floor(Math.random() * (this.attackPoints - 10));
             this.monsterHealth -= damage;
             this.playerTurn = true;
             this.logs.unshift("Monster takes " + damage + " damage");
@@ -40,7 +53,7 @@ new Vue({
             this.monsterMove();
         },
         heal: function(){
-            let hp = Math.floor(Math.random() * (20-2));
+            let hp = Math.floor(Math.random() * (this.healPoints - 10));
             this.playerHealth += hp;
             this.playerTurn = true;
             this.logs.unshift("Player heal " + hp);
@@ -93,6 +106,7 @@ new Vue({
             else return false;
         },
         newGame: function () {
+            this.showStart = true;
             this.showMenu = false;
             this.showLogs = false;
             this.logs = [];
@@ -103,6 +117,8 @@ new Vue({
             this.counterPlayerSpecial = 5;
             this.counterMonsterHeal = 5;
             this.counterPlayerHeal = 5;
+            this.attackPoints = 30;
+            this.healPoints = 40;
         }
     },
     updated: function () {
@@ -114,5 +130,10 @@ new Vue({
                 alert("You win!");
                 this.newGame();
             }
+            if(this.playerHealth > 100)
+                this.playerHealth = 100;
+            if(this.monsterHealth > 100)
+                this.monsterHealth = 100;
+
     },
 });
