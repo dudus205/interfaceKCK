@@ -8,7 +8,4 @@ npm run serve
 ```
 npm start
 ```
-#Usage
-###Vue.js
-###Express.js
-###Mongodb
+Usage: Vue.js, Express.js, Mongodb
