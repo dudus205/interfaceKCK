@@ -1,6 +1,4 @@
 # Projekt KCK- Monster Slayer
-
-##Installation 
 ### To run front-end write in cmd
 ```
 npm run serve
