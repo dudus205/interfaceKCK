@@ -1,5 +1,6 @@
-# Projekt KCK
+# Projekt KCK- Monster Slayer
 
+##Installation 
 ### To run front-end write in cmd
 ```
 npm run serve
@@ -9,5 +10,7 @@ npm run serve
 ```
 npm start
 ```
-
-
+#Usage
+###Vue.js
+###Express.js
+###Mongodb
