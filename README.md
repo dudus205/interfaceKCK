@@ -1,24 +1,13 @@
-# untitled4
+# Projekt KCK
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
+### To run front-end write in cmd
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### To run back-end goto "back-end" and write in cmd
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm start
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
