@@ -1,24 +1,11 @@
-# untitled4
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
+# Projekt KCK- Monster Slayer
+### To run front-end write in cmd
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### To run back-end goto "back-end" and write in cmd
 ```
-npm run build
+npm start
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Usage: Vue.js, Express.js, Mongodb
