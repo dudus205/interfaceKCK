@@ -243,7 +243,6 @@ export default {
   updated: function () {
     if(this.playerHealth <=0) {
       this.win = true;
-      this.score -= 150;
       this.message = "Game over!";
     }
     else if(this.monsterHealth <=0){

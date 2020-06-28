@@ -1,10 +1,22 @@
 <template>
-    <img src="../assets/logo.png">
+    <div>
+        <img v-if="!value" @click="changeValue" src="../assets/logo.png">
+        <img v-else @click="changeValue" src="../assets/logo2.png">
+    </div>
 </template>
 
 <script>
     export default {
-        name: "Logo"
+        data:function(){
+            return{
+                value: false,
+            }
+        },
+        methods:{
+            changeValue(){
+                this.value = !this.value;
+            }
+        }
     }
 </script>
 
