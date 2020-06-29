@@ -3,6 +3,7 @@
     <transition name="slide-fade" mode="out-in">
       <div id="score" v-if="showMenu === true">
           Score: {{score}}
+          Round: {{round + 1}}
       </div>
     </transition>
     <transition name="slide-fade" mode="out-in">
@@ -71,7 +72,9 @@
       <div class="modal" v-if="win">
         <div class="modal-content">
           <h3>{{message}}</h3>
-          <p>Score: {{score}}</p>
+          <p>
+            Score: {{score}}
+          </p>
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" v-model="name"><hr>
           <button class="start-game" @click="saveScore">Confirm</button>
@@ -106,6 +109,7 @@ export default {
       message:"Sum of attack and heal must be 70.",
       surrender: false,
       name: '',
+      round: 0,
   }},
   methods: {
     start: function(){
@@ -231,29 +235,50 @@ export default {
       this.playerHealth = 100;
       this.monsterHealth = 100;
       this.playerTurn = true;
+      this.counterReset();
+      this.attackPoints = 30;
+      this.healPoints = 40;
+      this.message = "Sum of attack and heal must be 70.";
+      this.round = 0;
+    },
+    counterReset(){
       this.counterMonsterSpecial = 5;
       this.counterPlayerSpecial = 5;
       this.counterMonsterHeal = 5;
       this.counterPlayerHeal = 5;
-      this.attackPoints = 30;
-      this.healPoints = 40;
-      this.message = "Sum of attack and heal must be 70.";
     }
+
   },
   updated: function () {
-    if(this.playerHealth <=0) {
-      this.win = true;
-      this.message = "Game over!";
-    }
-    else if(this.monsterHealth <=0){
-      this.win = true;
-      this.message = "You win!";
-    }
-    if(this.playerHealth > 100)
-      this.playerHealth = 100;
-    if(this.monsterHealth > 100)
-      this.monsterHealth = 100;
 
+      if(this.playerHealth <=0) {
+        this.playerHealth = 75;
+        this.monsterHealth += 50;
+        this.counterReset();
+        this.logs.unshift({
+          type: "System",
+          text: "*** Monster wins round " + (this.round + 1) +" ***",
+        });
+        this.round++;
+      }
+      else if(this.monsterHealth <=0){
+        this.monsterHealth = 75;
+        this.playerHealth += 50;
+        this.counterReset();
+        this.logs.unshift({
+          type: "System",
+          text: "*** Player wins round " + (this.round + 1) +" ***",
+        });
+        this.round++;
+      }
+      if(this.playerHealth > 100)
+        this.playerHealth = 100;
+      if(this.monsterHealth > 100)
+        this.monsterHealth = 100;
+      if(this.round === 3){
+        this.win = true;
+        this.message = "End of game";
+      }
   },
 }
 </script>

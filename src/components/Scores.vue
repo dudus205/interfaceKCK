@@ -6,18 +6,18 @@
                 @click="showScores = !showScores">Height scores</button>
             <div v-if="showScores">
                 <div id="switch">
-                    <button @click="changeContent" :style="{'active' : scoreValue}" autofocus>Score</button>
-                    <button @click="changeContent" :style="{'active' : scoreValue}">Players</button>
+                    <button @click="changeContent('score')">Score</button>
+                    <button @click="changeContent('players')">Players</button>
                 </div>
                 <p>Nickname: Score</p>
-                    <div v-if="scoreValue">
+                    <div v-if="scoreValue === 'score'">
                         <ul v-for="(value,key) in scoreList" :key="key">
                             <li>
                                 {{value.Player}}: {{value.Score}}
                             </li>
                         </ul>
                     </div>
-                    <div v-else>
+                    <div v-if="scoreValue === 'players'">
                         <ul v-for="(value,key) in scoreList2" :key="key">
                             <li>
                                 {{value.Player}}: {{value.Score}}
@@ -41,12 +41,12 @@
                 showScores: false,
                 scoreList: [],
                 scoreList2: [],
-                scoreValue: true,
+                scoreValue: 'score'
             }
         },
         methods:{
-            changeContent (){
-                this.scoreValue = !this.scoreValue;
+            changeContent (value){
+                this.scoreValue = value;
             },
         },
         mounted (){
