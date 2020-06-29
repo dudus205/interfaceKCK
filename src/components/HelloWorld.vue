@@ -110,6 +110,7 @@ export default {
       surrender: false,
       name: '',
       round: 0,
+      winRound: 0,
   }},
   methods: {
     start: function(){
@@ -240,6 +241,7 @@ export default {
       this.healPoints = 40;
       this.message = "Sum of attack and heal must be 70.";
       this.round = 0;
+      this.winRound = 0;
     },
     counterReset(){
       this.counterMonsterSpecial = 5;
@@ -250,7 +252,6 @@ export default {
 
   },
   updated: function () {
-
       if(this.playerHealth <=0) {
         this.playerHealth = 75;
         this.monsterHealth += 50;
@@ -265,6 +266,7 @@ export default {
         this.monsterHealth = 75;
         this.playerHealth += 50;
         this.counterReset();
+        this.winRound ++;
         this.logs.unshift({
           type: "System",
           text: "*** Player wins round " + (this.round + 1) +" ***",
@@ -277,7 +279,7 @@ export default {
         this.monsterHealth = 100;
       if(this.round === 3){
         this.win = true;
-        this.message = "End of game";
+        this.message = "You win " + this.winRound + ' rounds';
       }
   },
 }

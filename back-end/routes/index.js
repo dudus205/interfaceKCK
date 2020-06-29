@@ -8,7 +8,7 @@ router.use(cors());
 router.get('/score', function (req, res) {
     MongoClient.connect(url, function (err, client) {
         let db = client.db('Hightscores');
-        db.collection('Player').find().sort({Score: -1}).limit(6).toArray(function (err, result) {
+        db.collection('Player').find().sort({Score: 1}).limit(6).toArray(function (err, result) {
             if (err) throw err;
             else
                 res.send(result);
@@ -18,7 +18,7 @@ router.get('/score', function (req, res) {
 router.get('/score2', function (req, res) {
     MongoClient.connect(url, function (err, client) {
         let db = client.db('Hightscores');
-        db.collection('Player').find().sort({Player: 1}).limit(6).toArray(function (err, result) {
+        db.collection('Player').find().sort({Player: -1}).limit(6).toArray(function (err, result) {
             if (err) throw err;
             else
                 res.send(result);

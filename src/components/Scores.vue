@@ -3,7 +3,7 @@
         <transition name="slide-fade" mode="out-in">
             <button
                 v-if="showScores === false"
-                @click="showScores = !showScores">Height scores</button>
+                @click="getValues">Height scores</button>
             <div v-if="showScores">
                 <div id="switch">
                     <button @click="changeContent('score')">Score</button>
@@ -48,9 +48,9 @@
             changeContent (value){
                 this.scoreValue = value;
             },
-        },
-        mounted (){
-              const url = baseURL;
+            getValues(){
+                this.showScores = !this.showScores;
+                const url = baseURL;
                 axios.get(url + 'score')
                     .catch(error => console.log(error))
                     .then(response => (this.scoreList = response.data));
@@ -58,8 +58,8 @@
                 axios.get(url + 'score2')
                     .catch(error => console.log(error))
                     .then(response => (this.scoreList2 = response.data));
-
             },
+        },
     }
 </script>
 
